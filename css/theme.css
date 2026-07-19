@@ -1,0 +1,4 @@
+/* Theme-specific overrides */
+[data-theme="light"] .tabbar { background: rgba(245, 242, 236, 0.92); }
+[data-theme="light"] .modal-overlay { background: rgba(0,0,0,0.4); }
+[data-theme="light"] .empty-state { color: var(--text-3); }
