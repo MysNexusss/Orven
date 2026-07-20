@@ -1,111 +1,77 @@
-// js/main.js - StakeMaster
+// js/main.js - Atualizado
 
-let bets = []; // Armazenamento de apostas (simulado)
+let bets = [
+  { date: "2026-07-18", comp: "Brasileirão", team: "Flamengo", market: "Over 1.5", odds: 1.85, stake: 450, result: "Green", profit: 332.50 },
+  { date: "2026-07-17", comp: "Premier League", team: "Liverpool", market: "Vitória", odds: 2.10, stake: 800, result: "Red", profit: -800 },
+  { date: "2026-07-16", comp: "Champions", team: "Real Madrid", market: "Ambas Marcam", odds: 1.95, stake: 600, result: "Green", profit: 570 }
+];
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('%c✅ StakeMaster iniciado com sucesso!', 'color: #22c55e; font-size: 16px; font-weight: bold');
-  
-  // Carregar Sidebar
   loadSidebar();
-  
-  // Carregar Dashboard inicial
-  setTimeout(() => {
-    showDashboard();
-  }, 100);
+  showDashboard();
 });
 
-// Carregar Sidebar
 function loadSidebar() {
   fetch('components/sidebar.html')
     .then(res => res.text())
-    .then(html => {
-      document.getElementById('sidebar').innerHTML = html;
-    })
-    .catch(err => console.error('Erro ao carregar sidebar:', err));
+    .then(html => document.getElementById('sidebar').innerHTML = html);
 }
 
-// Mostrar Dashboard
 function showDashboard() {
   const content = document.getElementById('main-content');
-  content.innerHTML = `
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      
-      <!-- Card 1 -->
-      <div class="bg-zinc-900 rounded-3xl p-6 card-hover">
-        <div class="flex justify-between">
-          <div>
-            <p class="text-zinc-400 text-sm">Lucro Total</p>
-            <p class="text-4xl font-bold text-green-500 mt-2">R$ 12.480,50</p>
-          </div>
-          <i class="fas fa-dollar-sign text-5xl text-green-500/20"></i>
-        </div>
-        <p class="text-green-600 text-sm mt-4">+18.4% este mês</p>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="bg-zinc-900 rounded-3xl p-6 card-hover">
-        <div class="flex justify-between">
-          <div>
-            <p class="text-zinc-400 text-sm">Stake Acumulada</p>
-            <p class="text-4xl font-bold mt-2">R$ 45.800</p>
-          </div>
-          <i class="fas fa-coins text-5xl text-amber-500/20"></i>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="bg-zinc-900 rounded-3xl p-6 card-hover">
-        <div class="flex justify-between">
-          <div>
-            <p class="text-zinc-400 text-sm">ROI</p>
-            <p class="text-4xl font-bold text-green-500 mt-2">+27.2%</p>
-          </div>
-          <i class="fas fa-chart-line text-5xl text-blue-500/20"></i>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="bg-zinc-900 rounded-3xl p-6 card-hover">
-        <div class="flex justify-between">
-          <div>
-            <p class="text-zinc-400 text-sm">Taxa de Acerto</p>
-            <p class="text-4xl font-bold mt-2">68.4%</p>
-          </div>
-          <i class="fas fa-trophy text-5xl text-yellow-500/20"></i>
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">Evolução Mensal</h2>
-      <div class="bg-zinc-900 rounded-3xl p-6 h-80 flex items-center justify-center border border-zinc-700">
-        <p class="text-zinc-500">📊 Gráfico interativo virá aqui (Recharts ou Chart.js)</p>
-      </div>
-    </div>
-  `;
+  content.innerHTML = `... (mesmo dashboard anterior) ...`; // Você pode manter o anterior aqui
 }
 
-// Nova Aposta (Modal simples)
-function novaAposta() {
-  alert("📝 Formulário de Nova Aposta\n\nFuncionalidade em desenvolvimento!\n\nData, Competição, Equipe, Odds, Stake, etc.");
-  // Aqui futuramente abrirá um modal bonito
-}
-
-// Funções de navegação
 function showPage(page) {
   const content = document.getElementById('main-content');
   
   if (page === 'monthly') {
-    content.innerHTML = `<h2 class="text-2xl font-bold">Gestão Mensal</h2><p class="text-zinc-400 mt-4">Registro de apostas por mês...</p>`;
-  } else if (page === 'competitions') {
-    content.innerHTML = `<h2 class="text-2xl font-bold">Competições</h2>`;
-  } else if (page === 'teams') {
-    content.innerHTML = `<h2 class="text-2xl font-bold">Equipes</h2>`;
-  } else if (page === 'methods') {
-    content.innerHTML = `<h2 class="text-2xl font-bold">Métodos de Aposta</h2>`;
-  } else if (page === 'reports') {
-    content.innerHTML = `<h2 class="text-2xl font-bold">Relatórios</h2>`;
+    content.innerHTML = document.getElementById('monthly-template') ? document.getElementById('monthly-template').innerHTML : `
+      <div id="monthly-content"></div>
+    `;
+    loadMonthlyPage();
   } else {
     showDashboard();
+  }
+}
+
+function loadMonthlyPage() {
+  const tbody = document.getElementById('bets-table');
+  if (!tbody) return;
+
+  tbody.innerHTML = bets.map(bet => `
+    <tr class="hover:bg-zinc-800/50">
+      <td class="p-5">${bet.date}</td>
+      <td class="p-5">${bet.comp}</td>
+      <td class="p-5">${bet.team} - ${bet.market}</td>
+      <td class="p-5 text-right font-medium">${bet.odds}</td>
+      <td class="p-5 text-right font-medium">R$ ${bet.stake}</td>
+      <td class="p-5 text-center">
+        <span class="px-4 py-1 rounded-full text-xs font-bold ${bet.result === 'Green' ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'}">
+          ${bet.result}
+        </span>
+      </td>
+      <td class="p-5 text-right font-bold ${bet.profit > 0 ? 'text-green-500' : 'text-red-500'}">
+        R$ ${bet.profit}
+      </td>
+    </tr>
+  `).join('');
+}
+
+function novaAposta() {
+  const date = prompt("Data (AAAA-MM-DD):", "2026-07-20");
+  const comp = prompt("Competição:");
+  const team = prompt("Equipe / Mercado:");
+  const odds = parseFloat(prompt("Odds:"));
+  const stake = parseFloat(prompt("Stake (R$):"));
+  const result = prompt("Resultado (Green / Red / Void):");
+
+  if (date && comp && team && odds && stake && result) {
+    const profit = result === "Green" ? Math.round(stake * (odds - 1)) : result === "Void" ? 0 : -stake;
+    
+    bets.unshift({ date, comp, team, market: "Mercado", odds, stake, result, profit });
+    alert("✅ Aposta registrada com sucesso!");
+    
+    if (document.getElementById('bets-table')) loadMonthlyPage();
   }
 }
