@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.green {
+  color: #22c55e;
+}
+
+.red {
+  color: #ef4444;
+}
+
+.profit {
+  color: #22c55e;
+}
+
+.loss {
+  color: #ef4444;
+}
+
+/* Sidebar */
+.sidebar-link {
+  transition: all 0.2s;
+}
+
+.sidebar-link:hover {
+  background-color: #27272a;
+  border-radius: 8px;
+}
