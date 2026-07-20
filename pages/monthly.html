@@ -1,0 +1,42 @@
+<div class="space-y-6">
+  <div class="flex justify-between items-center">
+    <h2 class="text-2xl font-bold">Gestão Mensal - Julho 2026</h2>
+    <button onclick="novaAposta()" 
+            class="bg-green-600 hover:bg-green-500 px-6 py-3 rounded-2xl font-medium flex items-center gap-2">
+      <i class="fas fa-plus"></i> Nova Aposta
+    </button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="bg-zinc-900 p-5 rounded-3xl flex flex-wrap gap-4">
+    <input type="text" id="search" placeholder="Buscar aposta..." 
+           class="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 flex-1 min-w-[200px]">
+    
+    <select class="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3">
+      <option>Todas Competições</option>
+      <option>Brasileirão Série A</option>
+      <option>Premier League</option>
+      <option>Champions League</option>
+    </select>
+  </div>
+
+  <!-- Tabela de Apostas -->
+  <div class="bg-zinc-900 rounded-3xl overflow-hidden">
+    <table class="w-full">
+      <thead class="bg-zinc-800">
+        <tr>
+          <th class="text-left p-5">Data</th>
+          <th class="text-left p-5">Competição</th>
+          <th class="text-left p-5">Equipe / Mercado</th>
+          <th class="text-right p-5">Odds</th>
+          <th class="text-right p-5">Stake</th>
+          <th class="text-center p-5">Resultado</th>
+          <th class="text-right p-5">Lucro</th>
+        </tr>
+      </thead>
+      <tbody id="bets-table" class="divide-y divide-zinc-800">
+        <!-- Preenchido via JS -->
+      </tbody>
+    </table>
+  </div>
+</div>
