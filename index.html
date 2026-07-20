@@ -7,29 +7,45 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .card-hover:hover { transform: translateY(-4px); }
+  </style>
 </head>
 <body class="bg-zinc-950 text-zinc-100">
-  
-  <div class="flex h-screen">
+
+  <div class="flex h-screen overflow-hidden">
+    
     <!-- Sidebar -->
-    <div id="sidebar" class="w-64 bg-zinc-900 border-r border-zinc-800 p-4">
-      <!-- Será carregado via JS ou incluído -->
+    <div id="sidebar" class="w-64 bg-zinc-900 border-r border-zinc-800 overflow-auto">
+      <!-- Carregado via JS -->
     </div>
 
     <!-- Main Content -->
     <div class="flex-1 overflow-auto">
-      <div class="p-8">
-        <h1 class="text-4xl font-bold mb-2">Dashboard StakeMaster</h1>
-        <p class="text-zinc-400 mb-8">Gerencie suas apostas com inteligência</p>
+      <div class="p-6 md:p-8">
         
-        <!-- Dashboard Content -->
-        <div id="content">
-          <!-- Conteúdo carregado aqui -->
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+          <div>
+            <h1 class="text-3xl font-bold">Dashboard</h1>
+            <p class="text-zinc-400">Bem-vindo de volta • Julho 2026</p>
+          </div>
+          <button onclick="novaAposta()" 
+                  class="bg-green-600 hover:bg-green-500 px-5 py-2.5 rounded-xl font-medium flex items-center gap-2">
+            <i class="fas fa-plus"></i>
+            Nova Aposta
+          </button>
+        </div>
+
+        <!-- Content Area -->
+        <div id="main-content">
+          <!-- Dashboard será carregado aqui -->
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Script -->
   <script src="js/main.js"></script>
 </body>
 </html>
