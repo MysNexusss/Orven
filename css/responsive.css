@@ -1,4 +1,0 @@
-@media (min-width: 768px) { .hero-balance { font-size: 3.2rem; } .report-summary-item .value { font-size: 1.2rem; } .donut-wrap { gap: 32px; } .donut-chart { width: 160px; height: 160px; } }
-@media (max-width: 480px) { .form-grid { grid-template-columns: 1fr; } .form-row2 { grid-template-columns: 1fr; } .form-row2 button { margin-bottom: 0; width: 100%; } }
-@media (max-width: 380px) { .hero-balance { font-size: 2rem; } .hero-pills { grid-template-columns: 1fr; } .report-summary { grid-template-columns: 1fr; } .sim-compare { grid-template-columns: 1fr; } .debt-summary { grid-template-columns: 1fr; } }
-@supports (padding-top: env(safe-area-inset-top)) { main { padding-top: calc(20px + env(safe-area-inset-top)); } }
